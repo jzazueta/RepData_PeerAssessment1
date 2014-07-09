@@ -3,23 +3,27 @@
 
 ## Loading and preprocessing the data
 
-### unzip "activity.zip" file--assumed to be on the working directory
-### read file, gather complete cases and convert dates from strings into 
-### date objects:
 
-      ```  file <- unzip("activity.zip")
+Unzip "activity.zip" file--assumed to be on the working directory
+read file, gather complete cases and convert dates from strings into 
+date objects:
+
+```{r}
+ file <- unzip("activity.zip")
         steps <- read.csv(file)
         steps <- steps[complete.cases(steps),]
         steps$date<-as.Date(steps$date)
-      ```
-
+```
+ 
 #What is mean total number of steps taken per day?
 #generate histogram of steps and calculate meanand median steps per day
-    ```
+
+```{r}
         hist(steps$steps, main = "Total Steps per Day", xlab = "Steps")
         mean(steps$steps)
         median(steps$steps)
-    ```
+```
+
 ## What is the average daily activity pattern?
 
 
