@@ -1,6 +1,3 @@
----
-output: html_document
----
 # Reproducible Research: Peer Assessment 1
 
 
@@ -20,17 +17,18 @@ date objects:
 ```
  
 #What is mean total number of steps taken per day?
-#generate histogram of steps and calculate meanand median steps per day
+#generate histogram of steps and calculate mean Iand median steps per day
 
 
 ```r
-        hist(steps$steps, main = "Total Steps per Day", xlab = "Steps")
+        daily.steps <-aggregate(steps~date,steps,mean)[,2]
+        hist(daily.steps, main = "Average Steps per Day", xlab = "Average Steps", col="darkorange")
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+![plot of chunk unnamed-chunk-2](./PA1_template_files/figure-html/unnamed-chunk-2.png) 
 
 ```r
-        mean(steps$steps)
+        mean(daily.steps)
 ```
 
 ```
@@ -38,11 +36,11 @@ date objects:
 ```
 
 ```r
-        median(steps$steps)
+        median(daily.steps)
 ```
 
 ```
-## [1] 0
+## [1] 37.38
 ```
 
 ## What is the average daily activity pattern?
