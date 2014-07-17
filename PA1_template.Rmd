@@ -19,12 +19,13 @@ date objects:
 ```
  
 #What is mean total number of steps taken per day?
-#generate histogram of steps and calculate meanand median steps per day
+#generate histogram of steps and calculate mean Iand median steps per day
 
 ```{r}
-        hist(steps$steps, main = "Total Steps per Day", xlab = "Steps")
-        mean(steps$steps)
-        median(steps$steps)
+        daily.steps <-aggregate(steps~date,steps,mean)[,2]
+        hist(daily.steps, main = "Average Steps per Day", xlab = "Average Steps", col="darkorange")
+        mean(daily.steps)
+        median(daily.steps)
 ```
 
 ## What is the average daily activity pattern?
