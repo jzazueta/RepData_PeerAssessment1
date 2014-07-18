@@ -61,9 +61,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li>Unzip “activity.zip” file–assumed to be on the working directory read file</li>
 <li>gather complete cases and convert dates from strings into date objects:</li>
 </ul>
-<pre class="r"><code> file &lt;- unzip(&quot;activity.zip&quot;)
-        steps &lt;- read.csv(file)
-        steps &lt;- steps[complete.cases(steps),]
+<pre class="r"><code>        file &lt;- unzip(&quot;activity.zip&quot;)
+        steps &lt;- read.csv(file)      
         steps$date&lt;-as.Date(steps$date)</code></pre>
 </div>
 </div>

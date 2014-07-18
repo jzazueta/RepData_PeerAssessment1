@@ -11,9 +11,8 @@ date objects:
 
 
 ```r
- file <- unzip("activity.zip")
-        steps <- read.csv(file)
-        steps <- steps[complete.cases(steps),]
+        file <- unzip("activity.zip")
+        steps <- read.csv(file)      
         steps$date<-as.Date(steps$date)
 ```
  
