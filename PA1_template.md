@@ -1,11 +1,12 @@
-# Reproducible Research: Peer Assessment 1
+Reproducible Research: Peer Assessment 1
+======================================================================
 
+### Loading and preprocessing the data
 
-## Loading and preprocessing the data
-
-
-Unzip "activity.zip" file--assumed to be on the working directory
-read file, gather complete cases and convert dates from strings into 
+ 
+- Unzip "activity.zip" file--assumed to be on the working directory
+read file
+- gather complete cases and convert dates from strings into 
 date objects:
 
 
@@ -16,13 +17,18 @@ date objects:
         steps$date<-as.Date(steps$date)
 ```
  
-#What is mean total number of steps taken per day?
-#generate histogram of steps and calculate mean Iand median steps per day
+#What is the mean total number of steps taken per day?
+###Generate histogram of steps and calculate mean and median steps per day
+
+- Aggregate steps by day
+- Generate histogram
+- Calculate **mean** and **median** values
 
 
 ```r
-        daily.steps <-aggregate(steps~date,steps,mean)[,2]
-        hist(daily.steps, main = "Average Steps per Day", xlab = "Average Steps", col="darkorange")
+        daily.steps <-aggregate(steps~date,steps,sum)[,2]
+        dates <-aggregate(steps~date,steps,sum)[,1]
+        hist(daily.steps, main = "Total Steps per Day", xlab = "Total Steps", col="darkorange")
 ```
 
 ![plot of chunk unnamed-chunk-2](./PA1_template_files/figure-html/unnamed-chunk-2.png) 
@@ -32,7 +38,7 @@ date objects:
 ```
 
 ```
-## [1] 37.38
+## [1] 10766
 ```
 
 ```r
@@ -40,12 +46,33 @@ date objects:
 ```
 
 ```
-## [1] 37.38
+## [1] 10765
 ```
 
 ## What is the average daily activity pattern?
 
+- Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
+
+
+
+```r
+        daily.pattern<-aggregate(steps~interval,steps,mean)
+        plot(daily.pattern$interval,daily.pattern$steps, type="l", main= "Daily Activity Pattern", xlab="5-minute activity interval", ylab="Average number of steps",col = "darkorange")
+```
+
+![plot of chunk unnamed-chunk-3](./PA1_template_files/figure-html/unnamed-chunk-3.png) 
+
+- Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+
+
+```r
+        daily.pattern[daily.pattern$steps==max(daily.pattern$steps),]$interval
+```
+
+```
+## [1] 835
+```
 
 ## Imputing missing values
 
