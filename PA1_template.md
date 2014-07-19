@@ -75,6 +75,55 @@ date objects:
 
 ## Imputing missing values
 
+- Number of missing values in the dataset:
 
+
+```r
+sum(!complete.cases(steps))
+```
+
+```
+## [1] 2304
+```
+
+- impute missing values by replacin NA values with their corresponding interval average.
+
+
+```r
+        for (i in 1:length(steps$steps)){
+                for(interval in daily.pattern$interval){
+                        if(sum(steps$interval[i]==interval)==1 && is.na(steps$steps[i])){steps$steps[i] <- daily.pattern$steps[daily.pattern$interval==interval]}
+                }
+        }
+```
+
+- create histogram of steps by day with new imputed values
+
+
+```r
+daily.steps.new <-aggregate(steps~date,steps,sum)[,2]
+        dates <-aggregate(steps~date,steps,sum)[,1]
+        hist(daily.steps.new, main = "Total Steps per Day",sub = "(After imputed values)", xlab = "Total Steps", col="darkgreen")
+```
+
+![plot of chunk unnamed-chunk-7](./PA1_template_files/figure-html/unnamed-chunk-7.png) 
+
+```r
+        mean(daily.steps.new)
+```
+
+```
+## [1] 10766
+```
+
+```r
+        median(daily.steps.new)
+```
+
+```
+## [1] 10766
+```
+
+- It seems to be no significant difference in the mean and median values after introducing the imputed values.
 
 ## Are there differences in activity patterns between weekdays and weekends?
