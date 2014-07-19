@@ -85,3 +85,29 @@ daily.steps.new <-aggregate(steps~date,steps,sum)[,2]
 - It seems to be no significant difference in the mean and median values after introducing the imputed values.
 
 ## Are there differences in activity patterns between weekdays and weekends?
+
+- Create vector with weekday/weekend factor
+- Add weekday/weekend factor to steps data frame
+- Create separate data frames for weekdays and weekends
+- bind data sets and create a panel graph
+
+```{r}
+steps2 <-steps
+weeklogic<-(weekdays(steps2$date)== "Saturday" | weekdays(steps2$date)== "Sunday")
+        weekend<-rep("weekday",length(steps2$date))
+        weekend[weeklogic]<-"weekend"
+        weekend<-as.factor(weekend)
+        steps2$weekend<-weekend
+        steps.weekdays<-as.data.frame(steps2[steps2$weekend=="weekday",])
+        steps.weekends<-as.data.frame(steps2[steps2$weekend=="weekend",])
+        daily.pattern.weekends <- aggregate(steps~interval,steps.weekends,mean)
+        daily.pattern.weekdays <- aggregate(steps~interval,steps.weekdays,mean)
+        daily.pattern.weekends$weekends<-rep("weekends",length(daily.pattern.weekends$steps))
+        daily.pattern.weekdays$weekends<-rep("weekdays",length(daily.pattern.weekdays$steps))
+        daily.pattern<-rbind(daily.pattern.weekends,daily.pattern.weekdays)
+        library(ggplot2)
+        qplot(x=interval,y=steps,data=daily.pattern,facets=weekends~.)           
+        
+
+        
+```
