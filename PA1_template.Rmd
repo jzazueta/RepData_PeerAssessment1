@@ -106,8 +106,7 @@ weeklogic<-(weekdays(steps2$date)== "Saturday" | weekdays(steps2$date)== "Sunday
         daily.pattern.weekdays$weekends<-rep("weekdays",length(daily.pattern.weekdays$steps))
         daily.pattern<-rbind(daily.pattern.weekends,daily.pattern.weekdays)
         library(ggplot2)
-        qplot(x=interval,y=steps,data=daily.pattern,facets=weekends~.)           
-        
+        qplot(y=steps,x=interval,data=daily.pattern,facets=weekends~.,geom="line",ylab="Number of steps")
 
         
 ```

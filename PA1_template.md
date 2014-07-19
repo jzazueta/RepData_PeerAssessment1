@@ -156,7 +156,7 @@ weeklogic<-(weekdays(steps2$date)== "Saturday" | weekdays(steps2$date)== "Sunday
 ```
 
 ```r
-        qplot(x=interval,y=steps,data=daily.pattern,facets=weekends~.)           
+        qplot(y=steps,x=interval,data=daily.pattern,facets=weekends~.,geom="line",ylab="Number of steps")
 ```
 
 ![plot of chunk unnamed-chunk-8](./PA1_template_files/figure-html/unnamed-chunk-8.png) 
